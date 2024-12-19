@@ -42,12 +42,16 @@ def main():
     # Process the content through html2ft
     processed_content = html2ft(html_content)
 
+    imports = "from fasthtml.components import *"
+
+    if "svg" in processed_content:
+        print("SVG detected")
+        imports = imports + "\nfrom fasthtml.svg import *"
+
     # Write the result to a .py file in the specified output directory
     py_file = os.path.join(output_dir, f"{filename}.py")
     with open(py_file, "w") as f:
-        f.write(
-            "from fasthtml.components import *\nfrom fasthtml.svg import *\n\ncontent = "
-        )
+        f.write(f"{imports}\n\ncontent = ")
         f.write(processed_content)
 
     print(f"Processed content saved to {py_file}")
