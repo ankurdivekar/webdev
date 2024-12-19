@@ -5,6 +5,7 @@ import canvas
 import dashboard
 import landingpage
 import sidebar
+import table
 
 app = FastHTML(
     hdrs=Link(rel="stylesheet", href="app.css", type="text/css"),
@@ -18,6 +19,16 @@ def get(fname: str, ext: str):
 
 
 @rt("/")
+def get():
+    return Html("Hello World!")
+
+
+@rt("/landing")
+def get():
+    return landingpage.content
+
+
+@rt("/sidebar")
 def get():
     # return landingpage.content
     return sidebar.content
@@ -36,6 +47,11 @@ def get():
 @rt("/dashboard")
 def get():
     return dashboard.content
+
+
+@rt("/table")
+def get():
+    return table.content
 
 
 serve()
